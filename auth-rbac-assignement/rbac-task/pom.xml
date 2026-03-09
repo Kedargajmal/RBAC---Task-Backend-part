@@ -13,7 +13,7 @@
 	</parent>
 
 	<groupId>com.product</groupId>
-	<artifactId>rbac-product-system</artifactId>
+	<artifactId>rbac-task</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>rbac-product-system</name>
