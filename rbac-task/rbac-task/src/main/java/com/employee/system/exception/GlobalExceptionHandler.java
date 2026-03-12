@@ -8,13 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
-
+public class GlobalExceptionHandler
+{
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<Map<String, Object>> handleRuntimeException(RuntimeException ex) {
-
+    public ResponseEntity<Map<String, Object>> handleRuntimeException(RuntimeException ex)
+    {
         Map<String, Object> response = new HashMap<>();
-
         response.put("message", ex.getMessage());
         response.put("status", HttpStatus.BAD_REQUEST.value());
 

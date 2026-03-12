@@ -15,15 +15,15 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request) {
-
+    public String register(@RequestBody RegisterRequest request)
+    {
         authService.register(request);
         return "User registered successfully";
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) {
-
+    public AuthResponse login(@RequestBody LoginRequest request)
+    {
         return authService.login(request);
     }
 

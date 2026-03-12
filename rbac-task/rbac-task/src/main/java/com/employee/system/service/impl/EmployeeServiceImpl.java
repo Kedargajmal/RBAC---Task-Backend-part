@@ -18,30 +18,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeMapper employeeMapper;
 
     @Override
-    public Employee createEmployee(EmployeeRequest request) {
-
+    public Employee createEmployee(EmployeeRequest request)
+    {
         Employee employee = employeeMapper.toEntity(request);
         return employeeRepository.save(employee);
     }
 
     @Override
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
-    }
-
-    @Override
-    public Employee getEmployeeById(Long id) {
-
-        return employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
-    }
-
-    @Override
-    public Employee updateEmployee(Long id, EmployeeRequest request) {
-
-        Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
-
+    public Employee updateEmployee(Long id, EmployeeRequest request)
+    {
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee does not exist"));
         employee.setName(request.getName());
         employee.setDepartment(request.getDepartment());
         employee.setSalary(request.getSalary());
@@ -50,11 +36,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployee(Long id) {
+    public List<Employee> getAllEmployees()
+    {
+        return employeeRepository.findAll();
+    }
 
-        Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+    @Override
+    public Employee getEmployeeById(Long id)
+    {
+        return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee does not exist"));
+    }
 
+    @Override
+    public void deleteEmployee(Long id)
+    {
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee does not exist"));
         employeeRepository.delete(employee);
     }
 }

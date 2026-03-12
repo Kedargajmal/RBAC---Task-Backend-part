@@ -18,13 +18,15 @@ public class EmployeeController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    public List<Employee> getAllEmployees() {
+    public List<Employee> getAllEmployees()
+    {
         return employeeService.getAllEmployees();
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
-    public Employee getEmployee(@PathVariable Long id) {
+    public Employee getEmployee(@PathVariable Long id)
+    {
         return employeeService.getEmployeeById(id);
     }
 
@@ -36,14 +38,14 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Employee updateEmployee(@PathVariable Long id,
-                                   @RequestBody EmployeeRequest request) {
+    public Employee updateEmployee(@PathVariable Long id, @RequestBody EmployeeRequest request) {
         return employeeService.updateEmployee(id, request);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteEmployee(@PathVariable Long id) {
+    public void deleteEmployee(@PathVariable Long id)
+    {
         employeeService.deleteEmployee(id);
     }
 }

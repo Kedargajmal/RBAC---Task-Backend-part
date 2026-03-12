@@ -40,7 +40,7 @@ public class SecurityConfig {
 
                 .formLogin(form -> form.disable())
                 .httpBasic(http -> http.disable())
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);;
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpsec.build();
     }

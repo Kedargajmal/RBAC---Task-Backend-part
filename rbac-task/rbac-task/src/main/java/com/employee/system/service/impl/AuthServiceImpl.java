@@ -22,27 +22,25 @@ public class AuthServiceImpl implements AuthService {
     private final UserMapper userMapper;
 
     @Override
-    public void register(RegisterRequest request) {
-
+    public void register(RegisterRequest request)
+    {
         User user = userMapper.toEntity(request);
-
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-
         userRepository.save(user);
     }
 
     @Override
-    public AuthResponse login(LoginRequest request) {
-
+    public AuthResponse login(LoginRequest request)
+    {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword()))
+        {
             throw new RuntimeException("Invalid password");
         }
 
-        String token = jwtService.generateToken(user);
-
+        String token = jwtService.createToken(user);
         return new AuthResponse(token, user.getRole().name());
     }
 }

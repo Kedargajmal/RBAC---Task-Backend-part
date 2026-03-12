@@ -19,12 +19,13 @@ public class JwtService {
     @Value("${jwt.expiration}")
     private long expiration;
 
-    private Key getSignKey() {
+    private Key getSignKey()
+    {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    public String generateToken(User user) {
-
+    public String createToken(User user)
+    {
         return Jwts.builder()
                 .setSubject(user.getEmail())
                 .claim("role", user.getRole().name())
@@ -34,7 +35,8 @@ public class JwtService {
                 .compact();
     }
 
-    public String extractUsername(String token) {
+    public String extractUsername(String token)
+    {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignKey())
                 .build()
@@ -43,10 +45,9 @@ public class JwtService {
                 .getSubject();
     }
 
-    public boolean isTokenValid(String token, UserDetails userDetails) {
-
+    public boolean isTokenValid(String token, UserDetails userDetails)
+    {
         String username = extractUsername(token);
-
         return username.equals(userDetails.getUsername());
     }
 
